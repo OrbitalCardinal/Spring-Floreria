@@ -1,3 +1,7 @@
+<script>
+    export let data
+</script>
+
 <nav>
     <div>
         <img src="assets/springlogo.jpeg" alt="">
@@ -5,7 +9,19 @@
         <a href="/about">Acerca de nosotros</a>
     </div>
     <div>
-        <a href="/login">Iniciar sesión</a>
+        <!-- {#if !data.fullname}
+            <a href="/signin">Registrarse</a>
+            <a href="/login">Iniciar sesión</a>    
+        {/if} -->
+
+        <a href="/signin">Registrarse</a>
+        <a href="/login">Iniciar sesión</a>    
+        
+
+        {#if data.fullname}
+            <p>{data.fullname}</p>
+        {/if}
+
     </div>
 </nav>
 
