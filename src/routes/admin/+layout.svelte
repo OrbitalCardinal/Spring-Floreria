@@ -5,17 +5,13 @@
 <nav>
     <div>
         <img src="assets/springlogo.jpeg" alt="">
-        <a href="/">Inicio</a>
-        <a href="/about">Acerca de nosotros</a>
+        <a href="/admin">Productos</a>
+        <a href="/admin/pedidos">Pedidos</a>
+        <a href="/admin/ventas">Ventas</a>
     </div>
     <div>
-        <!-- {#if !data.fullname}
-            <a href="/signin">Registrarse</a>
-            <a href="/login">Iniciar sesión</a>    
-        {/if} -->
 
-        <a href="/signin">Registrarse</a>
-        <a href="/login">Iniciar sesión</a>    
+        <p>Administrador</p>   
         
 
         {#if data.fullname}

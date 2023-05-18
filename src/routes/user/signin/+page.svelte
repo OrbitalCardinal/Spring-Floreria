@@ -2,38 +2,49 @@
     import { enhance } from '$app/forms'
     import { goto } from '$app/navigation'
     import Swal from "sweetalert2";
-    import Modal from "../../lib/modal.svelte";
+    import Modal from "../../../lib/modal.svelte";
     export let form
     let showModal = true
 </script>
 
 <main>
-    <form method="POST" action="?/login" use:enhance={() => {
+    <form method="POST" action="?/register" use:enhance={() => {
         return async ({update}) => {
-            update({reset: false});
+            update({reset: false})
         }
     }}>
-        <h2>Iniciar sesión</h2>
+        <h2>Nueva cuenta de usuario</h2>
+        <label for="fullname">Nombre completo</label>
+        <input type="text" name="fullname" required>
 
         <label for="email">Correo electrónico</label>
         <input type="email" name="email" required>
 
+        <label for="address">Dirección <em>(Calle #, Colonia, Municipio, Estado, C.P)</em> </label>
+        <input type="text" name="address" required>
+
+        <label for="phone">Telefono <em>(10 digitos)</em> </label>
+        <input type="number" name="phone" required>
+
         <label for="password">Contraseña</label>
         <input type="password" name="password" required>
 
-        <button type="submit">Entrar</button>
+        <label for="confirm-password">Confirmar contraseña</label>
+        <input type="password" name="confirm-password" required>
+
+        <button type="submit">Crear nueva cuenta</button>
     </form>
 
     {#if form?.success}
-        <Modal title="Inicio de sesión correcto" buttonText='Continuar' action={() => goto('/')} />
+        <Modal title="Se registro correctamente" buttonText='Continuar' action={() => goto('/login')} />
     {/if}
 
-    {#if form?.error}
-        <Modal title="Inicio de sesión incorrecto" buttonText='Continuar' action={() => form.error = false} />
+    {#if form?.emailExists}
+        <Modal title="El correo ya esta en uso" buttonText='Continuar' action={() => form.emailExists = false} />
     {/if}
 
     <div class="image-container">
-        <img class="bg-img" src="/assets/loginFlowers1.jpg" alt="Arreglo floral">
+        <img class="bg-img" src="/assets/loginFlowers2.jpg" alt="Arreglo floral">
     </div>
 </main>
 
@@ -75,7 +86,7 @@
         width: 700px;
         height: calc(100vh - 80px);
         padding-left: 90px;
-        padding-top: 200px;
+        padding-top: 30px;
         display: flex;
         flex-direction: column;
         /* justify-content: center; */

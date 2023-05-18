@@ -1,4 +1,3 @@
-import userDataStore from '../../stores/userData.js';
 export const actions = {
   login: async ({ request, cookies }) => {
     const formData = await request.formData();

@@ -1,17 +1,23 @@
 {
-	"/": [
-		"src/routes/+layout.server.js",
-		"src/routes/+layout.server.js"
-	],
+	"/": [],
 	"/admin": [
-		"src/routes/+layout.server.js"
+		"src/routes/admin/+page.server.js"
 	],
-	"/login": [
-		"src/routes/login/+page.server.js",
-		"src/routes/+layout.server.js"
+	"/admin/pedidos": [],
+	"/admin/ventas": [],
+	"/api/pdf": [
+		"src/routes/api/pdf/+server.js"
 	],
-	"/signin": [
-		"src/routes/signin/+page.server.js",
-		"src/routes/+layout.server.js"
+	"/user": [
+		"src/routes/user/+layout.server.js",
+		"src/routes/user/+layout.server.js"
+	],
+	"/user/login": [
+		"src/routes/user/login/+page.server.js",
+		"src/routes/user/+layout.server.js"
+	],
+	"/user/signin": [
+		"src/routes/user/signin/+page.server.js",
+		"src/routes/user/+layout.server.js"
 	]
 }
