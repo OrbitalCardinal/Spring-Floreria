@@ -8,7 +8,9 @@
 	"/admin/pedidos": [
 		"src/routes/admin/pedidos/+page.server.js"
 	],
-	"/admin/ventas": [],
+	"/admin/ventas": [
+		"src/routes/admin/ventas/+page.server.js"
+	],
 	"/api/pdf": [
 		"src/routes/api/pdf/+server.js"
 	],

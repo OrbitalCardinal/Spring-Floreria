@@ -37,11 +37,12 @@
             })
         })
         const json = await response.json();
-        console.log(json.body.pdf)
-        const link = document.createElement('a');
-        link.href = `data:application/pdf;base64,${json.body.pdf}`;
-        link.download = 'example.pdf';
-        link.click();
+        const blob = new Blob([json.body.csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.setAttribute('href', url)
+        a.setAttribute('download', 'reporte_inventario.csv');
+        a.click()
     }
 
 </script>

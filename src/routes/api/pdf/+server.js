@@ -1,40 +1,38 @@
-import { PDFDocument, StandardFonts } from 'pdf-lib';
+function convertObjectsArrayToCsv(objectsArray) {
+    if (!Array.isArray(objectsArray) || objectsArray.length === 0) {
+      return '';
+    }
+  
+    const headers = Object.keys(objectsArray[0]);
+  
+    const csvRows = [];
+  
+    // Generate header row
+    const headerRow = headers.join(',');
+    csvRows.push(headerRow);
+  
+    // Generate data rows
+    objectsArray.forEach((object) => {
+      const values = headers.map((header) => object[header]);
+      const dataRow = values.join(',');
+      csvRows.push(dataRow);
+    });
+  
+    return csvRows.join('\n');
+  }
 
 export async function POST({request}) {
     let data = await request.json()
+    console.log(data)
     data = data['data']
 
-    const pdfDoc = await PDFDocument.create();
-    // Add content to the PDF document
-    const page = pdfDoc.addPage();
-    const { width, height } = page.getSize()
-    // const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const fontSize = 11
-    let x = 0
-    let y = 0
-    let line = 1
-    page.drawText(`ID del producto, Nombre del producto, Precio del producto, Existencias del producto`, {
-        x: 50,
-        y: height - 5 * fontSize * 0.5,
-        size: fontSize
-    });
-    for(let product of data) {
-        page.drawText(`${product['product-id']}, ${product['name']}, ${product.price}, ${product.stock}`, {
-            x: 50,
-            y: height - 5 * fontSize * line,
-            size: fontSize
-        });
-        line += 0.5
-    }
-    
-
     // Serialize the PDF document to a Uint8Array
-    const pdfBytes = await pdfDoc.saveAsBase64();
+    const csv = convertObjectsArrayToCsv(data)
 
     // Create a response with the PDF content
     const response = new Response(JSON.stringify({
         body: {
-            pdf: pdfBytes
+            csv: csv
         }
     }));
 

@@ -23,7 +23,7 @@ export const dictionary = {
 		"/": [~4],
 		"/admin": [~5,[2]],
 		"/admin/pedidos": [~6,[2]],
-		"/admin/ventas": [7,[2]],
+		"/admin/ventas": [~7,[2]],
 		"/user": [~8,[3]],
 		"/user/cart": [~9,[3]],
 		"/user/info": [~10,[3]],
