@@ -277,7 +277,11 @@
 
     .products-table td {
         text-align: center;
+        max-width: 30ch;
         padding: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .actions {

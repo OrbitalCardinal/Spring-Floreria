@@ -13,15 +13,23 @@ export const actions = {
     });
 
     let data = await response.json()
-    let userData = Object.values(data)[0];
+    console.log(data)
+    let userData = {
+      'user-id': Object.keys(data)[0],
+      ...data[Object.keys(data)[0]]
+    }
     
     if(userData['password'] === object['password']) {
-        cookies.set('fullname', userData.fullname, {
-            path: '/',
-            httpOnly: true,
-            sameSite: 'strict',
-            maxAge: 60 * 60 * 24 * 30,
-          })
+        Object.keys(userData).forEach(key => {
+          if(key != 'password' && key != 'confirm-password') {
+            cookies.set(key, userData[key], {
+                path: '/',
+                httpOnly: true,
+                sameSite: 'strict',
+                maxAge: 60 * 60 * 24 * 30,
+            })
+          }
+        })
         return { success: true }
     } else {
         return { error: true }
