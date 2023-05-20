@@ -41,7 +41,7 @@
                         <form method="POST" action="?/addToCart">
                             <input type="text" name="user-id" value={userData['user-id']} style="display: none">
                             <input type="text" name="product-id" value={product['product-id']} style="display: none">
-                            {#if userData['user-id'] != ''}
+                            {#if userData['user-id'] != '' && userData['user-id'] != null}
                                 {#if product['stock'] > 0}
                                     <button class="product-button" type="submit">Añadir al carrito</button>    
                                 {:else}
