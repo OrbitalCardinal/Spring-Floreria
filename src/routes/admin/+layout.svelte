@@ -5,7 +5,7 @@
 <nav>
     <div>
         <img src="assets/springlogo.jpeg" alt="">
-        <a href="/admin">Productos</a>
+        <a href="/admin">Inventario</a>
         <a href="/admin/pedidos">Pedidos</a>
         <a href="/admin/ventas">Ventas</a>
     </div>

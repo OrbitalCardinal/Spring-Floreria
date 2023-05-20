@@ -7,7 +7,6 @@
     <div>
         <img src="../assets/springlogo.jpeg" alt="">
         <a href="/user">Inicio</a>
-        <!-- <a href="/about">Acerca de nosotros</a> -->
     </div>
     <div>
 
