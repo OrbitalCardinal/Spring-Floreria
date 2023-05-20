@@ -10,23 +10,6 @@ export async function load({cookies}) {
         ordersData.push({'order-id': key, ...data[key]})
     })
     
-    let ordersProducts = []
-    for(let order of ordersData) {
-        let products = []
-        for(let productId of order['product-ids']) {
-            let productsUrl = `https://springfloreria-eda7b-default-rtdb.firebaseio.com/products/`
-            let productResponse = await fetch(productsUrl + `${productId}.json`, {
-                method: 'GET'
-            })
-            products.push(await productResponse.json())
-        }
-        ordersProducts.push(products)
-    }
-
-    for(var i=0; i<ordersData.length; i++) {
-        ordersData[i]['products-detail'] = ordersProducts[i]
-    }
-    console.log(ordersData)
     return {
         ordersData: ordersData
     }

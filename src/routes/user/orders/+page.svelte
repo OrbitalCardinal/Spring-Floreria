@@ -15,7 +15,7 @@
                 <th>Numero de productos</th>
             </thead>
             <tbody>
-                {#each order['products-detail'] as product, i}
+                {#each order['products'] as product, i}
                    <tr>
                         <td>{product['name']}</td>
                         <td>{product['price']}</td>

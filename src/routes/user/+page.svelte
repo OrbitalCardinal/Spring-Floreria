@@ -27,24 +27,37 @@
     </div>
     <h2>Productos</h2>
     <div class="section products">
-        {#each products as product}
-        <div class="product-card">
-            {#if isValidUrl(product['url-img'])}
-                <img class="product-img" src={product['url-img']} alt="">
-            {:else}
-                <img class="img-placeholder" src="https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg" alt="">
-            {/if}
-            <div class="product-info">
-                <span class="product-name">{product.name}</span>
-                <span class="product-price">$ {product.price}</span>
-                <form method="POST" action="?/addToCart">
-                    <input type="text" name="user-id" value={userData['user-id']} style="display: none">
-                    <input type="text" name="product-id" value={product['product-id']} style="display: none">
-                    <button class="product-button" type="submit">Añadir al carrito</button>
-                </form>
-            </div>
-        </div>
-        {/each}
+        {#if products.length > 0}
+            {#each products as product}
+                <div class="product-card">
+                    {#if isValidUrl(product['url-img'])}
+                        <img class="product-img" src={product['url-img']} alt="">
+                    {:else}
+                        <img class="img-placeholder" src="https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg" alt="">
+                    {/if}
+                    <div class="product-info">
+                        <span class="product-name">{product.name}</span>
+                        <span class="product-price">$ {product.price}</span>
+                        <form method="POST" action="?/addToCart">
+                            <input type="text" name="user-id" value={userData['user-id']} style="display: none">
+                            <input type="text" name="product-id" value={product['product-id']} style="display: none">
+                            {#if userData['user-id'] != ''}
+                                {#if product['stock'] > 0}
+                                    <button class="product-button" type="submit">Añadir al carrito</button>    
+                                {:else}
+                                    <p>Sin existencias</p>
+                                {/if}
+                            {/if}
+                            
+                        </form>
+                    </div>
+                </div>
+            {/each}   
+        {:else}
+            <h2>Por ahora no hay productos en el catalogo</h2>
+        {/if}
+
+        
     </div>
 
     {#if cartModal}

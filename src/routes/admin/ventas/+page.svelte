@@ -3,7 +3,7 @@
 
     let salesData = [];
     data.ordersData.forEach((order) => {
-        order["products-detail"].forEach((product, index) => {
+        order["products"].forEach((product, index) => {
             salesData.push({
                 "order-id": order["order-id"],
                 "order-date": order["order-date"],

@@ -13,15 +13,16 @@ export async function load({cookies}) {
     if(response.status == 200) {
         const data = await response.json()
         let newData = []
-
-        Object.keys(data).forEach(key => {
-            newData.push({'product-id': key, ...data[key]})
-        })
-
+        if(data) {
+            Object.keys(data).forEach(key => {
+                newData.push({'product-id': key, ...data[key]})
+            })
+        }
         return {
             products: newData,
             userData: userData
         }
+        
     } else {
         return {
             error: true

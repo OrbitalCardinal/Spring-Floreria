@@ -5,6 +5,7 @@
     let userData = data.userData
     let cartProducts = data.cartProducts
     let total = 0
+    let sucursal = false
     cartProducts.forEach(product => {
         total = total + parseInt(product['price']) * parseInt(product['count'])
     })
@@ -68,9 +69,18 @@
             <b>Telefono de contacto:</b>
             <span>{userData['phone']}</span>
 
-            <b><label for="">Dirección alternativa:</label></b>
+            <div>
+                <label for="sucursal">Recoger en sucursal</label>
+                <input type="checkbox" name="sucursal" bind:checked={sucursal}>
+            </div>
+
+
             <input type="text" name="user-id" style="display: none" value={userData['user-id']}>
-            <input type="text" name="alt-address">
+            {#if !sucursal}
+                <b><label for="">Dirección alternativa:</label></b>
+                <input type="text" name="alt-address">
+            {/if}
+            <input type="text" name="alt-address" style="display:none">
 
             <h3>Método de pago:</h3>
             <label for="">Numero de tarjeta:</label>

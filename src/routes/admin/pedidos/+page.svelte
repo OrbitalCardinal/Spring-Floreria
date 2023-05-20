@@ -22,7 +22,7 @@
         let pdfData = []
         for(let order of data.ordersData) {
             let productsString = ''
-            for(const [index, product] of order['products-detail'].entries()) {
+            for(const [index, product] of order['products'].entries()) {
                 productsString = productsString + `# ${order['count'][index]}, ${product['name']}`
             }
             pdfData.push({
@@ -83,6 +83,7 @@
             <th>Correo del cliente</th>
             <th>Dirección alternativa</th>
             <th>Productos del pedido</th>
+            <th>Recoger en sucursal</th>
         </thead>
         <tbody>
             {#each data.ordersData as order}
@@ -95,13 +96,14 @@
                     <td>{order["user-email"]}</td>
                     <td>{order["alt-address"]}</td>
                     <td>
-                        {#each order["products-detail"] as product, i}
+                        {#each order["products"] as product, i}
                             <b><span>#{order["count"][i]}</span></b>
                             <b><span>{product["name"]}</span></b> 
                             <span> | ${product["price"]} x {order["count"][i]} = ${parseFloat(product["price"]) * order["count"][i]}</span>
                             <br />
                         {/each}
                     </td>
+                    <td>{order["recoger_sucursal"] == 'off' ? "No": 'Si'}</td>
                 </tr>
             {/each}
         </tbody>

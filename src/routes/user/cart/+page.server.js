@@ -110,12 +110,14 @@ export const actions = {
         let ordersResponse = await fetch(ordersUrl, {
             method: 'POST',
             body: JSON.stringify({
+                'recoger_sucursal': formData.get('sucursal') != null ? formData.get('sucursal'): 'off',
                 'user-id': formData.get('user-id'),
                 'user-fullname': cookies.get('fullname'),
                 'user-email': cookies.get('email'),
                 'user-address': cookies.get('address'),
                 'user-phone': cookies.get('phone'),
                 'product-ids': cartIds,
+                'products': cartProductsCount,
                 'count': cartCounts,
                 'order-date': new Date(),
                 'alt-address': formData.get('alt-address')
@@ -128,5 +130,22 @@ export const actions = {
                 method: 'DELETE'
             })
         })
+        // Reduce stock
+        let productsUrl = 'https://springfloreria-eda7b-default-rtdb.firebaseio.com/products/'
+        for(let i = 0; i < cartIds.length; i++) {
+            let productId = cartIds[i]
+            const productResponse = await fetch(productsUrl + `${productId}.json`,{
+                method: 'GET',
+            })
+            const productData = await productResponse.json()
+            if(productData  ['stock'] > 0) {
+                const stockProductResponse = await fetch(productsUrl + `${productId}.json`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        'stock': productData['stock'] - cartCounts[i]
+                    })
+                })
+            }
+        }
     }
 }
